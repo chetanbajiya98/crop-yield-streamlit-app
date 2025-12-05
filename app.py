@@ -9,7 +9,7 @@ st.set_page_config(page_title="Crop Yield Prediction", layout="centered")
 # DOWNLOAD MODEL
 # -----------------------
 
-MODEL_URL = "https://huggingface.co/spaces/chetanbajiya/crop-yield-api/resolve/main/yield_model5.pkl"
+MODEL_URL = "https://huggingface.co/spaces/chetanbajiya/crop-yield-api/blob/main/yield_model5.pkl"
 MODEL_PATH = "yield_model5.pkl"
 
 @st.cache_resource
