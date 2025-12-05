@@ -14,26 +14,24 @@ MODEL_PATH = "yield_model5.pkl"
 
 @st.cache_resource
 def load_model():
-    # Download model if not exists
     if not os.path.exists(MODEL_PATH):
         st.write("⬇️ Downloading ML model from Hugging Face...")
-        response = requests.get(MODEL_URL)
-        if response.status_code == 200:
+        r = requests.get(MODEL_URL)
+        if r.status_code == 200:
             with open(MODEL_PATH, "wb") as f:
-                f.write(response.content)
+                f.write(r.content)
         else:
             st.error("❌ Failed to download model.")
             st.stop()
 
-    # Load model using pickle (more stable than joblib)
     try:
-        with open(MODEL_PATH, "rb") as f:
-            model = pickle.load(f)
+        model = joblib.load(MODEL_PATH)
         return model
     except Exception as e:
-        st.error("❌ Model loading failed. Likely version mismatch.")
+        st.error("❌ Model loading failed.")
         st.write(e)
         st.stop()
+
 
 model = load_model()
 
