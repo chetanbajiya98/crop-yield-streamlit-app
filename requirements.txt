@@ -3,5 +3,6 @@ requests
 joblib
 numpy
 pandas
+plotly
 scikit-learn==1.6.1
 
