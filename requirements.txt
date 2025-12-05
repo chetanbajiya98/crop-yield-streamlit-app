@@ -1,7 +1,7 @@
 streamlit
-joblib
 requests
-pandas
+joblib
 numpy
+pandas
 scikit-learn==1.6.1
 
