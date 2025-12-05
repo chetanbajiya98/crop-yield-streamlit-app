@@ -7,26 +7,23 @@ MODEL_URL = "https://huggingface.co/spaces/chetanbajiya/crop-yield-api/resolve/m
 
 @st.cache_resource
 def load_model():
-    local_path = "yield_model5.pkl"
+    local_model = "yield_model5.pkl"
 
-    # Download the model only if not exists
-    if not os.path.exists(local_path):
+    if not os.path.exists(local_model):
         st.write("⬇️ Downloading ML model from Hugging Face...")
-        response = requests.get(MODEL_URL)
-
-        if response.status_code == 200:
-            with open(local_path, "wb") as f:
-                f.write(response.content)
+        r = requests.get(MODEL_URL)
+        if r.status_code == 200:
+            with open(local_model, "wb") as f:
+                f.write(r.content)
         else:
-            st.error("❌ Model download failed.")
+            st.error("❌ Failed to download model.")
             st.stop()
 
+    # Try loading the model
     try:
-        model = joblib.load(local_path)
+        model = joblib.load(local_model)
         return model
     except Exception as e:
-        st.error("❌ Model loading failed. Version mismatch or corrupted file.")
+        st.error("❌ Model loading failed. Likely due to sklearn version mismatch.")
         st.write(e)
         st.stop()
-
-model = load_model()
