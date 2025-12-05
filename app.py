@@ -87,3 +87,4 @@ if st.button("🚀 Predict Yield"):
     except Exception as e:
         st.error("❌ Prediction failed.")
         st.write(e)
+
